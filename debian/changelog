@@ -1,4 +1,4 @@
-murmur3 (1.0.0.0) xenial; urgency=low
+murmur3 (1.0.0.0~xenial) xenial; urgency=low
 
   * Initial release
 
