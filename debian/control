@@ -3,7 +3,6 @@ Priority: extra
 Maintainer: Alexis Wilke <alexis@m2osw.com>
 Build-Depends: cmake,
     debhelper,
-    libmurmur3-dev,
     snapcmakemodules (>= 1.0.35.3~xenial)
 Standards-Version: 3.9.4
 Section: libs

@@ -1,3 +1,11 @@
+murmur3 (1.0.1.0~xenial) xenial; urgency=low
+
+  * Fixed the build dependencies.
+  * Added a TODO.md file.
+  * Fixed the copyright notice.
+
+ -- Alexis Wilke <alexis@m2osw.com>  Sat, 19 Oct 2019 02:14:06 -0800
+
 murmur3 (1.0.0.0~xenial) xenial; urgency=low
 
   * Initial release
