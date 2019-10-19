@@ -1,0 +1,28 @@
+//-----------------------------------------------------------------------------
+// MurmurHash3 was written by Austin Appleby, and is placed in the
+// public domain. The author hereby disclaims copyright to this source
+// code.
+
+#ifndef _MURMURHASH3_VERSION_H_
+#define _MURMURHASH3_VERSION_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define    LIBMURMUR3_VERSION_MAJOR     @LIBMURMUR3_VERSION_MAJOR@
+#define    LIBMURMUR3_VERSION_MINOR     @LIBMURMUR3_VERSION_MINOR@
+#define    LIBMURMUR3_VERSION_PATCH     @LIBMURMUR3_VERSION_PATCH@
+#define    LIBMURMUR3_VERSION_STRING    "@LIBMURMUR3_VERSION_MAJOR@.@LIBMURMUR3_VERSION_MINOR@.@LIBMURMUR3_VERSION_PATCH@"
+
+int             get_major_version();
+int             get_release_version();
+int             get_patch_version();
+char const *    get_version_string();
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // _MURMURHASH3_VERSION_H_
+// vim: ts=4 sw=4 et

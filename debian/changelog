@@ -1,0 +1,5 @@
+murmur3 (1.0.0.0) xenial; urgency=low
+
+  * Initial release
+
+ -- Alexis Wilke <alexis@m2osw.com>  Sat, 19 Oct 2019 00:48:35 -0800
