@@ -15,13 +15,13 @@ Section: libdevel
 Architecture: any
 Depends: libmurmur3 (= ${binary:Version}), ${misc:Depends}
 Description: Development package for the Murmur3 library.
- Provides the Murmur3 Hash functions.
+ Provides the Murmur3 Hash functions in a library.
 
 Package: libmurmur3
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: C library offering a Murmur3 Hash implementation.
- Provides the Murmur3 Hash functions.
+ Provides the Murmur3 Hash functions in a library.
 
 # vim: ts=4 sw=4 et

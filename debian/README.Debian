@@ -1,6 +1,6 @@
-advgetopt for Debian
---------------------
+murmur3 for Debian
+------------------
 
-<possible notes regarding this package - if none, delete this file>
+This is a set of C files that I compile and stick in a debian package.
 
- -- R. Douglas Barbieri <doug@dooglio.net>  Mon, 25 Nov 2013 11:18:14 -0800
+ -- Alexis Wilke <alexis@m2osw.com>  Mon,  5 May 2020 20:10:15 -0800

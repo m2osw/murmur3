@@ -1,9 +1,6 @@
-advgetopt for Debian
---------------------
+murmur3 for Debian
+------------------
 
-<this file describes information about the source package, see Debian policy
-manual section 4.14. You WILL either need to modify or delete this file>
-
-
-
+This is all in one, source and debian. There are not real clean source
+for murmur3, unfortunately. So maybe this is the first one like that.
 

@@ -1,6 +1,8 @@
 murmur3 (1.0.2.0~xenial) xenial; urgency=low
 
   * Added the fallthrough attribute so it compiles under Ubuntu 18.04.
+  * Updated the compat version to 9.
+  * Fixed the libmurmur3 names and content.
 
  -- Alexis Wilke <alexis@m2osw.com>  Sun, 26 Jan 2020 20:03:39 -0800
 
