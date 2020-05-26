@@ -1,4 +1,4 @@
-Source: murmur3
+Source: libmurmur3
 Priority: extra
 Maintainer: Alexis Wilke <alexis@m2osw.com>
 Build-Depends: cmake,
@@ -7,8 +7,8 @@ Build-Depends: cmake,
 Standards-Version: 3.9.4
 Section: libs
 Homepage: https://snapwebsites.org/
-Vcs-Git: https://github.com/m2osw/murmur3.git
-Vcs-Browser: https://github.com/m2osw/murmur3
+Vcs-Git: https://github.com/m2osw/libmurmur3.git
+Vcs-Browser: https://github.com/m2osw/libmurmur3
 
 Package: libmurmur3-dev
 Section: libdevel
