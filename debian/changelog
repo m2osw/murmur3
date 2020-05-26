@@ -1,3 +1,9 @@
+murmur3 (1.0.3.0~xenial) xenial; urgency=low
+
+  * Make the fallthrough attribute optional (requires gcc 7+).
+
+ -- Alexis Wilke <alexis@m2osw.com>  Mon, 25 May 2020 20:54:58 -0800
+
 murmur3 (1.0.2.0~xenial) xenial; urgency=low
 
   * Added the fallthrough attribute so it compiles under Ubuntu 18.04.
