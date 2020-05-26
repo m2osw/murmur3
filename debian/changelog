@@ -1,10 +1,10 @@
-murmur3 (1.0.3.0~xenial) xenial; urgency=low
+libmurmur3 (1.0.3.0~xenial) xenial; urgency=low
 
   * Make the fallthrough attribute optional (requires gcc 7+).
 
  -- Alexis Wilke <alexis@m2osw.com>  Mon, 25 May 2020 20:54:58 -0800
 
-murmur3 (1.0.2.0~xenial) xenial; urgency=low
+libmurmur3 (1.0.2.0~xenial) xenial; urgency=low
 
   * Added the fallthrough attribute so it compiles under Ubuntu 18.04.
   * Updated the compat version to 9.
@@ -12,7 +12,7 @@ murmur3 (1.0.2.0~xenial) xenial; urgency=low
 
  -- Alexis Wilke <alexis@m2osw.com>  Sun, 26 Jan 2020 20:03:39 -0800
 
-murmur3 (1.0.1.0~xenial) xenial; urgency=low
+libmurmur3 (1.0.1.0~xenial) xenial; urgency=low
 
   * Fixed the build dependencies.
   * Added a TODO.md file.
@@ -20,7 +20,7 @@ murmur3 (1.0.1.0~xenial) xenial; urgency=low
 
  -- Alexis Wilke <alexis@m2osw.com>  Sat, 19 Oct 2019 02:14:06 -0800
 
-murmur3 (1.0.0.0~xenial) xenial; urgency=low
+libmurmur3 (1.0.0.0~xenial) xenial; urgency=low
 
   * Initial release
 
