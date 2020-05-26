@@ -1,3 +1,9 @@
+libmurmur3 (1.0.3.1~xenial) xenial; urgency=low
+
+  * Bump version to get another build request.
+
+ -- Alexis Wilke <alexis@m2osw.com>  Tue, 26 May 2020 11:20:49 -0800
+
 libmurmur3 (1.0.3.0~xenial) xenial; urgency=low
 
   * Make the fallthrough attribute optional (requires gcc 7+).
