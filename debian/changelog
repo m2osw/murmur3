@@ -1,3 +1,9 @@
+libmurmur3 (1.0.4.0~bionic) bionic; urgency=low
+
+  * Changed the version to bionic.
+
+ -- Alexis Wilke <alexis@m2osw.com>  Fri, 13 Nov 2020 20:46:54 -0800
+
 libmurmur3 (1.0.3.1~xenial) xenial; urgency=low
 
   * Bump version to get another build request.
