@@ -1,6 +1,6 @@
 # Murmur3 Hash
 
-cmake_minimum_required(VERSION 2.8.4)
+cmake_minimum_required(VERSION 3.10.2)
 
 project(murmur3_library)
 
