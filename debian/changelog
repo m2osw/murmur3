@@ -1,3 +1,9 @@
+libmurmur3 (1.0.4.5~bionic) bionic; urgency=high
+
+  * Bumped build version to rebuild on Launchpad.
+
+ -- Alexis Wilke <alexis@m2osw.com>  Thu, 19 May 2022 10:34:40 -0700
+
 libmurmur3 (1.0.4.4~bionic) bionic; urgency=high
 
   * Bumped build version to rebuild on Launchpad.
