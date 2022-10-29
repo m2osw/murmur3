@@ -9,7 +9,11 @@ https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp
 
 This project is compiled in a PPA so you can directly get the compiled
 version for your Ubuntu computer. Maybe even on a Debian computer.
+Although note that there is a project named `libmurmur3` and `libmurmur3-dev`
+available in Ubuntu. I do not know whether this is the same code or not.
 
+Our package offers the `murmur3sum` tool which can be used on the command
+line very much like you use the `md5sum` tool.
 
 The following comes from Peter Scott package:
 
@@ -47,4 +51,5 @@ There is an example program, `example.c`, which you can look at and play with. Y
 License and contributing
 ------------------------
 
+TODO: this is true of the original code, not all the code in this project.
 All this code is in the public domain. Murmur3 was created by Austin Appleby, and the C port and general tidying up was done by Peter Scott. If you'd like to contribute something, I would love to add your name to this list.

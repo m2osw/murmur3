@@ -1,3 +1,13 @@
+murmur3 (1.0.5.0~bionic) bionic; urgency=high
+
+  * Changed the project name from libmurmur3 to just murmur3.
+  * Added the murmur3sum tool (similar to md5sum with murmur3).
+  * Added a manual page for the murmur3sum tool.
+  * Added support for a streaming version in C++.
+  * Converted the test to snapcatch2 so we can get coverage data.
+
+ -- Alexis Wilke <alexis@m2osw.com>  Sat, 29 Oct 2022 14:01:03 -0700
+
 murmur3 (1.0.4.6~bionic) bionic; urgency=high
 
   * Changed compat to v10.

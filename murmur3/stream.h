@@ -11,9 +11,11 @@
 namespace murmur3
 {
 
+typedef std::uint64_t           seed_t;
+
 // total number of bytes in a `std::uint8_t hash[]` buffer
 //
-constexpr std::size_t   HASH_SIZE = sizeof(std::uint64_t) * 2;
+constexpr std::size_t   HASH_SIZE = sizeof(seed_t) * 2;
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wpedantic"
@@ -21,23 +23,48 @@ typedef unsigned __int128       hash_t;
 #pragma GCC diagnostic pop
 
 
-class murmur3_stream
+class hash
 {
 public:
-                        murmur3_stream();
-                        murmur3_stream(std::uint64_t seed);
-                        murmur3_stream(std::uint64_t seed1, std::uint64_t seed2);
+                            hash(seed_t h1 = 0, seed_t h2 = 0);
+
+    void                    set(std::uint8_t const * h);
+    std::uint8_t const *    get() const;
+
+    hash_t                  to_uint128() const;
+    std::string             to_string() const;
+
+    bool                    operator == (hash const & rhs) const;
+    bool                    operator != (hash const & rhs) const;
+    bool                    operator <  (hash const & rhs) const;
+    bool                    operator <= (hash const & rhs) const;
+    bool                    operator >  (hash const & rhs) const;
+    bool                    operator >= (hash const & rhs) const;
+
+private:
+    std::uint8_t            f_hash[HASH_SIZE] = {};
+};
+
+
+
+class stream
+{
+public:
+                        stream();
+                        stream(seed_t seed);
+                        stream(seed_t seed1, seed_t seed2);
 
     void                reset();
-    void                reset(std::uint64_t seed);
-    void                reset(std::uint64_t seed1, std::uint64_t seed2);
+    void                reset(seed_t seed);
+    void                reset(seed_t seed1, seed_t seed2);
 
-    void                get_seeds(std::uint64_t & a, std::uint64_t & b) const;
+    void                get_seeds(seed_t & a, seed_t & b) const;
     void                add_data(void const * data, std::size_t size);
 
-    void                flush(std::uint8_t * hash);
-    hash_t              flush();
-    void                flush(std::string & hash);
+    hash                flush() const;
+    //void                flush(std::uint8_t * hash) const;
+    //hash_t              flush() const;
+    //void                flush(std::string & hash) const;
 
 private:
     void                read_block(
@@ -45,18 +72,22 @@ private:
                             , std::size_t & size
                             , std::uint64_t & k1
                             , std::uint64_t & k2);
-    std::uint64_t       rotl64(std::uint64_t x, int r);
-    std::uint64_t       fmix64(std::uint64_t k);
 
-    bool                f_flushed = false;  // if true, the stream is "closed"
-    std::size_t         f_data_size = 0;    // number of bytes in data[]
-    std::uint8_t        f_data[16] = {};    // if the input buffer was not a multiple of 16
-    std::uint64_t       f_seed1 = 0;
-    std::uint64_t       f_seed2 = 0;
-    std::uint64_t       f_h1 = 0;
-    std::uint64_t       f_h2 = 0;
-    std::uint64_t       f_total_size = 0;
+    std::size_t         f_data_size = 0;    // number of bytes in f_data[]
+    std::uint8_t        f_data[15] = {};    // if the input buffer was not a multiple of 16 save up to 15 bytes here
+    seed_t              f_seed1 = 0;
+    seed_t              f_seed2 = 0;
+    seed_t              f_h1 = 0;
+    seed_t              f_h2 = 0;
+    seed_t              f_total_size = 0;
 };
+
+
+hash sum(void const * data, std::size_t size, seed_t seed = 0);
+hash sum(void const * data, std::size_t size, seed_t seed1, seed_t seed2);
+hash sum(std::string const & filename, seed_t seed = 0);
+hash sum(std::string const & filename, seed_t seed1, seed_t seed2);
+
 
 } // namespace murmur3
 // vim: ts=4 sw=4 et

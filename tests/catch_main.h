@@ -1,6 +1,6 @@
 // Copyright (c) 2006-2022  Made to Order Software Corp.  All Rights Reserved
 //
-// https://snapwebsites.org/project/advgetopt
+// https://snapwebsites.org/project/murmur3
 // contact@m2osw.com
 //
 // This program is free software; you can redistribute it and/or modify
@@ -19,19 +19,14 @@
 #pragma once
 
 
-// advgetopt
-//
-#include    <advgetopt/advgetopt.h>
-
-
-// cppthread
-//
-#include    <cppthread/log.h>
-
-
 // catch2
 //
 #include    <catch2/snapcatch2.hpp>
+
+
+// snapdev
+//
+#include    <snapdev/hexadecimal_string.h>
 
 
 // C++
@@ -46,15 +41,21 @@ namespace SNAP_CATCH2_NAMESPACE
 {
 
 
-extern std::string                  g_config_filename;
-extern std::string                  g_config_project_filename;
+inline std::string hex32(std::uint32_t *hash)
+{
+    //sprintf(buf, "%08x", *hash);
+    return snapdev::int_to_hex(hash[0], false, 8);
+}
 
+inline std::string hex128(std::uint32_t *hash)
+{
+    //sprintf(buf, "%08x%08x%08x%08x", hash[0], hash[1], hash[2], hash[3]);
+    return snapdev::int_to_hex(hash[0], false, 8)
+         + snapdev::int_to_hex(hash[1], false, 8)
+         + snapdev::int_to_hex(hash[2], false, 8)
+         + snapdev::int_to_hex(hash[3], false, 8);
+}
 
-void                                push_expected_log(std::string const & message);
-void                                log_for_test(cppthread::log_level_t level, std::string const & message);
-void                                expected_logs_stack_is_empty();
-
-void                                init_tmp_dir(std::string const & project_name, std::string const & prefname, bool dir = false);
 
 
 } // SNAP_CATCH2_NAMESPACE namespace

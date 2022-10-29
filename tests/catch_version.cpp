@@ -36,10 +36,12 @@
 CATCH_TEST_CASE("version", "[version][valid]")
 {
     CATCH_START_SECTION("Verify the library version")
+    {
         CATCH_REQUIRE(get_murmur3_major_version() == MURMUR3_VERSION_MAJOR);
         CATCH_REQUIRE(get_murmur3_release_version() == MURMUR3_VERSION_MINOR);
         CATCH_REQUIRE(get_murmur3_patch_version() == MURMUR3_VERSION_PATCH);
         CATCH_REQUIRE(strcmp(get_murmur3_version_string(), MURMUR3_VERSION_STRING) == 0);
+    }
     CATCH_END_SECTION()
 }
 

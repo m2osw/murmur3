@@ -1,0 +1,117 @@
+.TH MURMUR3SUM 1 "October 2022" "murmur3sum 1.x" "User Commands"
+.SH NAME
+murmur3sum \- Compute or verify the murmur3 hash of files
+.SH SYNOPSIS
+.B murmur3sum
+[\fI\-\-OPTION\fR] [--] [<file1> <file2> ... <fileN>] [> <checksum-file>]
+.PP
+.B murmur3sum --check
+[\fI\-\-OPTION\fR] [<checksum-file>]
+.SH DESCRIPTION
+The \fBmurmur3sum(1)\fR tool is similar to the \fBmd5sum(1)\fR tool. It
+reads files and computes a hash based on the Murmur3 hashing scheme.
+
+Without the --check (or -c) option, the specified files are read and their
+hash computed and printed to stdout following the md5sum format:
+
+    00000000000000000000000000000000  some/file/name.here
+
+where the 0's are replaced by the hash and the "some/file/name.here" is
+the path as specified on the command line.
+
+The special "-" filename represents standard input. If no filename is
+specified, then the tool automatically uses "-". In other words, you can
+pipe data through this tool like so:
+
+    cat file | murmur3sum --no-filename
+
+The --no-filename is probably a good idea in this case, otherwise it uses
+"-" as the filename which doesn't mean much.
+
+.SH "VERIFY FILES"
+The tool can be used to verify a set of files.
+
+First, you create a checksum file like so:
+
+    murmur3sum "file1" "file2" ... "fileN" > checksums.murmur3
+
+Later, you can verify that the files have not changed as follow:
+
+    murmur3sum --check checksums.murmur3
+
+The tool makes use of the hashes and filenames found inside the
+checksums.murmur3 file to verify the current hashes of the files on disk.
+If they changed, an error is emitted. If they are equal, it shows the filename
+followed by "OK" (which you can --quiet if you do not need to see the results).
+
+In a script, you can use the "if" instruction like so:
+
+    if ! murmur3sum --quiet --check checksums.murmur3
+    then
+        # detected an error
+.br
+	   ...handle error...
+    fi
+
+.SH "COMMAND LINE OPTIONS"
+The following describes all the supported command line options. The
+special "--" \fIoption\fR is used to stop the parsing of options and
+forcibly view all the remaining command line arguments as filenames.
+
+.TP
+\fB\-b\fR, \fB--binary\fR
+Read the input files in binary. This is always the case. We do not support
+a text mode.
+
+.TP
+\fB\-c\fR, \fB--check\fR
+Check the hash of files as saved in a text which is read by \fBmurmur3sum(1)\fR.
+Each line is expected to be defined as above (hash, two spaces, the filename).
+It verifies that the hash is a valid string of hexadecimal digits. If so, it
+uses the filename to read the file and compute its hash. If that computed
+hash is equal to the hash found in the checksum file, then the filename is
+written in stdout followed by "OK". Otherwise an error is printed. If one
+or more errors occur, then the tool exits with 1.
+
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print a brief document about the tool usage, then exit.
+
+.TP
+\fB\-\-basename\fR
+Output the basename of each file instead of their complete path. This can be
+useful for files being installed in a known location later.
+
+.TP
+\fB\-\-license\fR, \fB\-\-version\fR
+Display the version and license information of the murmur3sum tool.
+
+.TP
+\fB\-\-no-filename\fR
+Only output the hash. This is particularly useful when computing a hash
+for one file only and the filename is really not required in the output.
+
+.TP
+\fB\-t\fR, \fB\-\-text\fR
+This command line option is ignored. We always read the files in binary.
+
+.TP
+\fB\-\-quiet\fR
+Do not display the "filename: OK" message when checking files.
+
+.SH AUTHOR
+Written by Alexis Wilke <alexis@m2osw.com>.
+.SH "REPORTING BUGS"
+Report bugs to <https://github.com/m2osw/murmur3/issues>.
+.br
+iplock home page: <https://snapwebsites.org/project/murmur3>.
+.SH COPYRIGHT
+Copyright \(co 2022 Made to Order Software Corporation
+.br
+License: GPLv3
+.br
+This is free software: you are free to change and redistribute it.
+.br
+There is NO WARRANTY, to the extent permitted by law.
+.SH "SEE ALSO"
+.BR md5sum (1)
