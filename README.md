@@ -7,13 +7,23 @@ https://github.com/PeterScott/murmur3
 The first implementation comes from
 https://github.com/aappleby/smhasher/blob/master/src/MurmurHash3.cpp
 
-This project is compiled in a PPA so you can directly get the compiled
-version for your Ubuntu computer. Maybe even on a Debian computer.
-Although note that there is a project named `libmurmur3` and `libmurmur3-dev`
-available in Ubuntu. I do not know whether this is the same code or not.
+This project is compiled in
+[a PPA](https://launchpad.net/~snapcpp/+archive/ubuntu/ppa/+packages)
+so you can directly get the compiled version for your Ubuntu computer.
+Maybe even on a Debian computer. Although note that there is are packages
+named `libmurmur3` and `libmurmur3-dev` available in standard Ubuntu.
+I do not know whether this is the same code or not.
 
-Our package offers the `murmur3sum` tool which can be used on the command
+Our library includes a C++ implementation which offers a streaming version
+of the murmur3 implementation. The header also includes several helper
+functions which one can use to directly transform a buffer or a file in
+a murmur3 hash object. The hash object can be be transform in a `uint128_t`
+or an `std::string` if you do not want to deal with a buffer of 16 chars.
+
+Our package offers the `murmur3sum` tool, which can be used on the command
 line very much like you use the `md5sum` tool.
+
+---
 
 The following comes from Peter Scott package:
 
