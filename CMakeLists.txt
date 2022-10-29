@@ -7,8 +7,9 @@ project(murmur3_library)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
 find_package(SnapCMakeModules REQUIRED)
+find_package(SnapDev          REQUIRED)
 
-SnapGetVersion(LIBMURMUR3 ${CMAKE_CURRENT_SOURCE_DIR})
+SnapGetVersion(MURMUR3 ${CMAKE_CURRENT_SOURCE_DIR})
 
 include_directories(
     ${PROJECT_SOURCE_DIR}
@@ -17,6 +18,7 @@ include_directories(
 
 add_subdirectory(cmake  )
 add_subdirectory(murmur3)
+add_subdirectory(tools  )
 add_subdirectory(tests  )
 
 # vim: ts=4 sw=4 et nocindent

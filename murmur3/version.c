@@ -5,24 +5,24 @@
 
 #include    "murmur3/version.h"
 
-int get_major_version()
+int get_murmur3_major_version()
 {
-    return LIBMURMUR3_VERSION_MAJOR;
+    return MURMUR3_VERSION_MAJOR;
 }
 
-int get_release_version()
+int get_murmur3_release_version()
 {
-    return LIBMURMUR3_VERSION_MINOR;
+    return MURMUR3_VERSION_MINOR;
 }
 
-int get_patch_version()
+int get_murmur3_patch_version()
 {
-    return LIBMURMUR3_VERSION_PATCH;
+    return MURMUR3_VERSION_PATCH;
 }
 
-char const * get_version_string()
+char const * get_murmur3_version_string()
 {
-    return LIBMURMUR3_VERSION_STRING;
+    return MURMUR3_VERSION_STRING;
 }
 
 // vim: ts=4 sw=4 et

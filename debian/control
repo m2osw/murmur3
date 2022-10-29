@@ -3,7 +3,8 @@ Priority: extra
 Maintainer: Alexis Wilke <alexis@m2osw.com>
 Build-Depends: cmake,
     debhelper,
-    snapcmakemodules (>= 1.0.35.3~bionic)
+    snapcmakemodules (>= 1.0.35.3~bionic),
+    snapdev (>= 1.0.0.0~bionic)
 Standards-Version: 3.9.4
 Section: libs
 Homepage: https://snapwebsites.org/

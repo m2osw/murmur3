@@ -44,6 +44,22 @@ int main(void) {
     TESTHASH(x64, 128, 123, "xxxxxxxxxxxxxxxxxxxxxxxxxxxx", "becf7e04dbcf74637751664ef66e73e0");
     TESTHASH(x64, 128, 123, "", "4cd9597081679d1abd92f8784bace33d");
 
+    // the following is to test a streaming version which we do not yet have
+    // I am thinking that a streaming version is required for really large
+    // files which we do not want to load as one very large buffer in memory
+    //{
+    //    uint32_t hash[4];
+    //    MurmurHash3_x64_128("Hello,", strlen("Hello,"), 123, hash);
+    //    MurmurHash3_x64_128(" world!", strlen(" world!"), 0, hash);
+    //    char buf[32];
+    //    hex128(hash, buf);
+    //    if (strcmp(buf, "8743acad421c8c73d373c3f5f19732fd") != 0) {
+    //        printf("FAIL(line %i): %s != %s\n", __LINE__, expected, buf);
+    //        failed++;
+    //    } else passed++;
+    //}
+
+
     printf("Total tests: %i\nPassed: %i\nFailed: %i\n", passed + failed, passed, failed);
     return failed > 0;
 }

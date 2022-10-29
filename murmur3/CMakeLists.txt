@@ -5,9 +5,20 @@ configure_file(
     ${CMAKE_CURRENT_BINARY_DIR}/version.h
 )
 
+message("++ BEFORE ADD LIB: CMAKE_CXX_FLAGS = [${CMAKE_CXX_FLAGS}]")
 add_library(${PROJECT_NAME} SHARED
     murmur3.c
+    stream.cpp
     version.c
+)
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        ${SNAPDEV_INCLUDE_DIRS}
+)
+
+target_link_libraries(${PROJECT_NAME}
+    ${SNAPDEV_LIBRARIES}
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

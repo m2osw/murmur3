@@ -10,15 +10,15 @@
 extern "C" {
 #endif
 
-#define    LIBMURMUR3_VERSION_MAJOR     @LIBMURMUR3_VERSION_MAJOR@
-#define    LIBMURMUR3_VERSION_MINOR     @LIBMURMUR3_VERSION_MINOR@
-#define    LIBMURMUR3_VERSION_PATCH     @LIBMURMUR3_VERSION_PATCH@
-#define    LIBMURMUR3_VERSION_STRING    "@LIBMURMUR3_VERSION_MAJOR@.@LIBMURMUR3_VERSION_MINOR@.@LIBMURMUR3_VERSION_PATCH@"
+#define    MURMUR3_VERSION_MAJOR     @MURMUR3_VERSION_MAJOR@
+#define    MURMUR3_VERSION_MINOR     @MURMUR3_VERSION_MINOR@
+#define    MURMUR3_VERSION_PATCH     @MURMUR3_VERSION_PATCH@
+#define    MURMUR3_VERSION_STRING    "@MURMUR3_VERSION_MAJOR@.@MURMUR3_VERSION_MINOR@.@MURMUR3_VERSION_PATCH@"
 
-int             get_major_version();
-int             get_release_version();
-int             get_patch_version();
-char const *    get_version_string();
+int             get_murmur3_major_version();
+int             get_murmur3_release_version();
+int             get_murmur3_patch_version();
+char const *    get_murmur3_version_string();
 
 #ifdef __cplusplus
 }
