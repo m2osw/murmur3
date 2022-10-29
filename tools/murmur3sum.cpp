@@ -1,6 +1,6 @@
 // Copyright (c) 2012-2022  Made to Order Software Corp.  All Rights Reserved
 //
-// https://snapwebsites.org/project/libmurmur3
+// https://snapwebsites.org/project/murmur3
 // contact@m2osw.com
 //
 // This program is free software: you can redistribute it and/or modify
