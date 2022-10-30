@@ -216,10 +216,10 @@ void check_hashes()
             // extract the expected hash from the murmur3 file
             //
             std::string const hex(line, 32);
-            std::string hash;
+            murmur3::hash expected_hash;
             try
             {
-                hash = snapdev::hex_to_bin(hex);
+                expected_hash.from_string(hex);
             }
             catch(snapdev::hexadecimal_string_invalid_parameter const & e)
             {
@@ -236,20 +236,6 @@ void check_hashes()
                 ++g_error;
                 continue;
             }
-            if(hash.length() != murmur3::HASH_SIZE)
-            {
-                std::cerr
-                    << "error:"
-                    << g_progname
-                    << ':'
-                    << l
-                    << ": invalid hash.\n";
-                ++g_error;
-                continue;
-            }
-            std::reverse(hash.begin(), hash.end()); // somewhere things get flipped (TBD--is that expected?! or is it a bug in snapdev?)
-            murmur3::hash expected_hash;
-            expected_hash.set(reinterpret_cast<std::uint8_t const *>(hash.c_str()));
 
             // retrieve the filename
             //

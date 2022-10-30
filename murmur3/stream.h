@@ -23,6 +23,9 @@ typedef unsigned __int128       hash_t;
 #pragma GCC diagnostic pop
 
 
+constexpr seed_t const          FFMPEG_DEFAULT_SEED = 0x725acc55daddca55LLU;
+
+
 class hash
 {
 public:
@@ -33,6 +36,7 @@ public:
 
     hash_t                  to_uint128() const;
     std::string             to_string() const;
+    void                    from_string(std::string const & in);
 
     bool                    operator == (hash const & rhs) const;
     bool                    operator != (hash const & rhs) const;
@@ -68,7 +72,7 @@ public:
 
 private:
     void                read_block(
-                              const uint8_t * & data
+                              std::uint8_t const * & data
                             , std::size_t & size
                             , std::uint64_t & k1
                             , std::uint64_t & k2);

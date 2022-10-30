@@ -16,6 +16,7 @@
 //
 #include    <exception>
 #include    <fstream>
+#include    <iomanip>
 #include    <iostream>
 
 
@@ -55,10 +56,10 @@ inline seed_t fmix64(seed_t k)
 
 hash::hash(seed_t h1, seed_t h2)
 {
-    reinterpret_cast<std::uint32_t *>(f_hash)[0] = h2 >> 32;
-    reinterpret_cast<std::uint32_t *>(f_hash)[1] = h2;
-    reinterpret_cast<std::uint32_t *>(f_hash)[2] = h1 >> 32;
-    reinterpret_cast<std::uint32_t *>(f_hash)[3] = h1;
+    reinterpret_cast<std::uint32_t *>(f_hash)[0] = h1;
+    reinterpret_cast<std::uint32_t *>(f_hash)[1] = h1 >> 32;
+    reinterpret_cast<std::uint32_t *>(f_hash)[2] = h2;
+    reinterpret_cast<std::uint32_t *>(f_hash)[3] = h2 >> 32;
 }
 
 
@@ -82,7 +83,47 @@ hash_t hash::to_uint128() const
 
 std::string hash::to_string() const
 {
-    return snapdev::int_to_hex(to_uint128(), false, 32);
+    // the original swaps the result hash value so it create a string
+    // matching the original we have to swap the same way... (I think this
+    // is a form or little vs big endian issue)
+    //
+    return snapdev::int_to_hex(reinterpret_cast<std::uint32_t const *>(f_hash)[0], false, 8)
+         + snapdev::int_to_hex(reinterpret_cast<std::uint32_t const *>(f_hash)[1], false, 8)
+         + snapdev::int_to_hex(reinterpret_cast<std::uint32_t const *>(f_hash)[2], false, 8)
+         + snapdev::int_to_hex(reinterpret_cast<std::uint32_t const *>(f_hash)[3], false, 8);
+}
+
+
+void hash::from_string(std::string const & in)
+{
+    std::string hash(snapdev::hex_to_bin(in));
+    if(hash.length() > murmur3::HASH_SIZE)
+    {
+        throw snapdev::hexadecimal_string_invalid_parameter(
+              "\""
+            + in
+            + "\" is not a valid 128 bit murmur3 hash value; it is too long.");
+    }
+
+    // leading zeroes may have been removed
+    //
+    if(hash.length() < murmur3::HASH_SIZE)
+    {
+        hash = std::string(murmur3::HASH_SIZE - hash.length(), '\0') + hash;
+    }
+
+    // TBD: I'm wondering whether the hex_to_bin() reverses the bytes
+    //      here we sure gets them swapped so we have to flip them back...
+    //
+    hash_t const reversed(snapdev::bswap_128(*reinterpret_cast<unsigned __int128 const *>(hash.c_str())));
+
+    // the values in a string are saved flipped (see to_string() as well)
+    // so we have to flip them back as follow
+    //
+    reinterpret_cast<std::uint32_t *>(f_hash)[0] = reinterpret_cast<std::uint32_t const *>(&reversed)[3];
+    reinterpret_cast<std::uint32_t *>(f_hash)[1] = reinterpret_cast<std::uint32_t const *>(&reversed)[2];
+    reinterpret_cast<std::uint32_t *>(f_hash)[2] = reinterpret_cast<std::uint32_t const *>(&reversed)[1];
+    reinterpret_cast<std::uint32_t *>(f_hash)[3] = reinterpret_cast<std::uint32_t const *>(&reversed)[0];
 }
 
 
@@ -195,7 +236,8 @@ void stream::add_data(void const * data, std::size_t size)
 
     while(f_data_size + size >= 16)
     {
-        std::uint64_t k1, k2;
+        std::uint64_t k1(0);
+        std::uint64_t k2(0);
         read_block(d, size, k1, k2);
 
         k1 *= g_c1;
@@ -323,7 +365,7 @@ hash stream::flush() const
 
 
 void stream::read_block(
-      const uint8_t * & data
+      std::uint8_t const * & data
     , std::size_t & size
     , std::uint64_t & k1
     , std::uint64_t & k2)
@@ -681,10 +723,12 @@ void stream::read_block(
         f_data_size = 0;
         break;
 
+    // LCOV_EXCL_START
     default:
         throw std::runtime_error("somehow the f_data_size field is "
             + std::to_string(f_data_size)
             + " which not a number between 0 and 15 inclusive.");
+    // LCOV_EXCL_STOP
 
     }
 }

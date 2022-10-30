@@ -5,6 +5,8 @@ murmur3 (1.0.5.0~bionic) bionic; urgency=high
   * Added a manual page for the murmur3sum tool.
   * Added support for a streaming version in C++.
   * Converted the test to snapcatch2 so we can get coverage data.
+  * Fixed seeding of 64 bit C version, it supports 64 or 128 bits now.
+  * Added many tests to cover all the new code.
 
  -- Alexis Wilke <alexis@m2osw.com>  Sat, 29 Oct 2022 14:01:03 -0700
 
