@@ -1,4 +1,4 @@
-Source: libmurmur3
+Source: murmur3
 Priority: extra
 Maintainer: Alexis Wilke <alexis@m2osw.com>
 Build-Depends: cmake,
@@ -13,17 +13,17 @@ Build-Depends: cmake,
 Standards-Version: 3.9.4
 Section: libs
 Homepage: https://snapwebsites.org/
-Vcs-Git: https://github.com/m2osw/libmurmur3.git
-Vcs-Browser: https://github.com/m2osw/libmurmur3
+Vcs-Git: https://github.com/m2osw/murmur3.git
+Vcs-Browser: https://github.com/m2osw/murmur3
 
-Package: libmurmur3-dev
+Package: murmur3-dev
 Section: libdevel
 Architecture: any
-Depends: libmurmur3 (= ${binary:Version}), ${misc:Depends}
+Depends: murmur3 (= ${binary:Version}), ${misc:Depends}
 Description: Development package for the Murmur3 library.
  Provides the Murmur3 Hash functions in a library.
 
-Package: libmurmur3
+Package: murmur3
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
