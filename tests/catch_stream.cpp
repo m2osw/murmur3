@@ -193,18 +193,18 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
         size %= 256;
         size += 25; // 25 to 280
 
-        char buf[size];
-        getrandom(buf, sizeof(buf), 0);
+        std::vector<char> buf(size);
+        getrandom(buf.data(), buf.size(), 0);
 
         murmur3::stream sum;
-        sum.add_data(buf, sizeof(buf));
+        sum.add_data(buf.data(), buf.size());
 
         murmur3::seed_t seed1(0);
         murmur3::seed_t seed2(0);
         sum.get_seeds(seed1, seed2);
 
         std::uint32_t hash[4];
-        MurmurHash3_x64_128_128(buf, sizeof(buf), seed1, seed2, hash);
+        MurmurHash3_x64_128_128(buf.data(), buf.size(), seed1, seed2, hash);
         std::string const c_hash(SNAP_CATCH2_NAMESPACE::hex128(hash));
 
         CATCH_CHECK(sum.flush().to_string() == c_hash);
@@ -247,20 +247,20 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
         constexpr std::size_t four_kb(1024 * 4);
         for(std::size_t size(0); size < four_kb; ++size)
         {
-            char buf[size];
-            getrandom(buf, sizeof(buf), 0);
+            std::vector<char> buf(size);
+            getrandom(buf.data(), buf.size(), 0);
 
             // first compute the hash with the basic C function
             //
             std::uint32_t hash[4];
-            MurmurHash3_x64_128(buf, sizeof(buf), 0, hash);
+            MurmurHash3_x64_128(buf.data(), buf.size(), 0, hash);
             std::string c_hash(SNAP_CATCH2_NAMESPACE::hex128(hash));
 
             // second compute the same hash with the stream function 4Kb at
             // a time so we should hit all possible cases
             //
             murmur3::stream sum(0);
-            sum.add_data(buf, sizeof(buf));
+            sum.add_data(buf.data(), buf.size());
             CATCH_CHECK(sum.flush().to_string() == c_hash);
 
             murmur3::hash expected_hash;
@@ -296,7 +296,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
             std::string const test_filename(tmp_dir + "/" + std::to_string(size) + "_bytes.bin");
             {
                 std::ofstream out(test_filename);
-                out.write(buf, sizeof(buf));
+                out.write(buf.data(), buf.size());
             }
 //std::cerr << "-- test with file [" << test_filename << "] -> " << murmur3::sum(test_filename).to_string() << "\n";
             CATCH_CHECK(murmur3::sum(test_filename).to_string() == c_hash);
@@ -310,21 +310,21 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
         //
         for(std::size_t size(1); size < 16; ++size)
         {
-            char buf[size + 16];
-            getrandom(buf, sizeof(buf), 0);
+            std::vector<char> buf(size + 16);
+            getrandom(buf.data(), buf.size(), 0);
 
             // first compute the hash with the basic C function
             //
             std::uint32_t hash[4];
-            MurmurHash3_x64_128(buf, sizeof(buf), 0, hash);
+            MurmurHash3_x64_128(buf.data(), buf.size(), 0, hash);
             std::string c_hash(SNAP_CATCH2_NAMESPACE::hex128(hash));
 
             // second compute the same hash with the stream function
             // starting with a few bytes
             //
             murmur3::stream sum(0);
-            sum.add_data(buf, size);
-            sum.add_data(buf + size, 16);
+            sum.add_data(buf.data(), size);
+            sum.add_data(buf.data() + size, 16);
             CATCH_CHECK(sum.flush().to_string() == c_hash);
         }
     }
@@ -341,13 +341,13 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
             size %= 256;
             size += 25; // 25 to 280
 
-            char buf[size];
-            getrandom(buf, sizeof(buf), 0);
+            std::vector<char> buf(size);
+            getrandom(buf.data(), buf.size(), 0);
 
             // first compute the hash with the basic C function
             //
             std::uint32_t hash[4];
-            MurmurHash3_x64_128(buf, sizeof(buf), 0, hash);
+            MurmurHash3_x64_128(buf.data(), buf.size(), 0, hash);
             std::string c_hash(SNAP_CATCH2_NAMESPACE::hex128(hash));
 
             murmur3::stream sum(0);
@@ -363,7 +363,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
                     incr = size - pos;
                 }
 
-                sum.add_data(buf + pos, incr);
+                sum.add_data(buf.data() + pos, incr);
 
                 pos += incr;
             }

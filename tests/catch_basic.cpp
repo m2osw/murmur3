@@ -29,18 +29,6 @@ CATCH_TEST_CASE("basic", "[version][valid]")
 {
     CATCH_START_SECTION("Verify C version")
     {
-//#define TESTHASH(arch, nbytes, seed, str, expected) {                   \
-//        char *input = str;                                              \
-//        uint32_t hash[4];                                               \
-//        char buf[33];                                                   \
-//        MurmurHash3_##arch##_##nbytes(input, strlen(input), (seed), hash); \
-//        hex##nbytes(hash, buf);                                         \
-//        if (strcmp(buf, expected) != 0) {                               \
-//            printf("FAIL(line %i): %s != %s\n", __LINE__, expected, buf); \
-//            failed++;                                                   \
-//        } else passed++;                                                \
-//    }
-
         std::uint32_t hash[4];
 
         //TESTHASH(x86, 32, 1234, "Hello, world!", "faf6cdb3");

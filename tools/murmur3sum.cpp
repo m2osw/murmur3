@@ -45,7 +45,6 @@ namespace
 {
 
 std::string                     g_progname = std::string();
-bool                            g_stream = true;
 bool                            g_basename = false;
 bool                            g_no_filename = false;
 bool                            g_check = false;

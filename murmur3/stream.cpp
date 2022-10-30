@@ -96,8 +96,8 @@ std::string hash::to_string() const
 
 void hash::from_string(std::string const & in)
 {
-    std::string hash(snapdev::hex_to_bin(in));
-    if(hash.length() > murmur3::HASH_SIZE)
+    std::string h(snapdev::hex_to_bin(in));
+    if(h.length() > murmur3::HASH_SIZE)
     {
         throw snapdev::hexadecimal_string_invalid_parameter(
               "\""
@@ -107,15 +107,15 @@ void hash::from_string(std::string const & in)
 
     // leading zeroes may have been removed
     //
-    if(hash.length() < murmur3::HASH_SIZE)
+    if(h.length() < murmur3::HASH_SIZE)
     {
-        hash = std::string(murmur3::HASH_SIZE - hash.length(), '\0') + hash;
+        h = std::string(murmur3::HASH_SIZE - h.length(), '\0') + h;
     }
 
     // TBD: I'm wondering whether the hex_to_bin() reverses the bytes
     //      here we sure gets them swapped so we have to flip them back...
     //
-    hash_t const reversed(snapdev::bswap_128(*reinterpret_cast<unsigned __int128 const *>(hash.c_str())));
+    hash_t const reversed(snapdev::bswap_128(*reinterpret_cast<hash_t const *>(h.c_str())));
 
     // the values in a string are saved flipped (see to_string() as well)
     // so we have to flip them back as follow
