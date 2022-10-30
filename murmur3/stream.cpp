@@ -113,17 +113,20 @@ void hash::from_string(std::string const & in)
     }
 
     // TBD: I'm wondering whether the hex_to_bin() reverses the bytes
-    //      here we sure gets them swapped so we have to flip them back...
+    //      here we sure get them swapped so we have to flip them back...
+    //
+    // The extra ptr is to avoid the aliasing errors in Release mode.
     //
     hash_t const reversed(snapdev::bswap_128(*reinterpret_cast<hash_t const *>(h.c_str())));
+    char const * ptr(reinterpret_cast<char const *>(&reversed));
 
     // the values in a string are saved flipped (see to_string() as well)
     // so we have to flip them back as follow
     //
-    reinterpret_cast<std::uint32_t *>(f_hash)[0] = reinterpret_cast<std::uint32_t const *>(&reversed)[3];
-    reinterpret_cast<std::uint32_t *>(f_hash)[1] = reinterpret_cast<std::uint32_t const *>(&reversed)[2];
-    reinterpret_cast<std::uint32_t *>(f_hash)[2] = reinterpret_cast<std::uint32_t const *>(&reversed)[1];
-    reinterpret_cast<std::uint32_t *>(f_hash)[3] = reinterpret_cast<std::uint32_t const *>(&reversed)[0];
+    reinterpret_cast<std::uint32_t *>(f_hash)[0] = reinterpret_cast<std::uint32_t const *>(ptr)[3];
+    reinterpret_cast<std::uint32_t *>(f_hash)[1] = reinterpret_cast<std::uint32_t const *>(ptr)[2];
+    reinterpret_cast<std::uint32_t *>(f_hash)[2] = reinterpret_cast<std::uint32_t const *>(ptr)[1];
+    reinterpret_cast<std::uint32_t *>(f_hash)[3] = reinterpret_cast<std::uint32_t const *>(ptr)[0];
 }
 
 
@@ -172,7 +175,10 @@ bool hash::operator >= (hash const & rhs) const
 stream::stream()
 {
     seed_t seed[2];
-    getrandom(seed, sizeof(seed), 0);
+    if(getrandom(seed, sizeof(seed), 0) != sizeof(seed))
+    {
+        throw std::runtime_error("getrandom() did not return enough data.");
+    }
     reset(seed[0], seed[1]);
 }
 

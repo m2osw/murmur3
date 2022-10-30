@@ -189,12 +189,12 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
     CATCH_START_SECTION("Stream with random seed")
     {
         std::size_t size(0);
-        getrandom(&size, sizeof(size), 0);
+        CATCH_REQUIRE(getrandom(&size, sizeof(size), 0) == static_cast<ssize_t>(sizeof(size)));
         size %= 256;
         size += 25; // 25 to 280
 
         std::vector<char> buf(size);
-        getrandom(buf.data(), buf.size(), 0);
+        CATCH_REQUIRE(getrandom(buf.data(), buf.size(), 0) == static_cast<ssize_t>(buf.size()));
 
         murmur3::stream sum;
         sum.add_data(buf.data(), buf.size());
@@ -215,7 +215,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
     {
         constexpr std::size_t four_kb(1024 * 4);
         char buf[four_kb];
-        getrandom(buf, sizeof(buf), 0);
+        CATCH_REQUIRE(getrandom(buf, sizeof(buf), 0) == static_cast<ssize_t>(sizeof(buf)));
 
         // first compute the hash with the basic C function
         //
@@ -248,7 +248,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
         for(std::size_t size(0); size < four_kb; ++size)
         {
             std::vector<char> buf(size);
-            getrandom(buf.data(), buf.size(), 0);
+            CATCH_REQUIRE(getrandom(buf.data(), buf.size(), 0) == static_cast<ssize_t>(buf.size()));
 
             // first compute the hash with the basic C function
             //
@@ -311,7 +311,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
         for(std::size_t size(1); size < 16; ++size)
         {
             std::vector<char> buf(size + 16);
-            getrandom(buf.data(), buf.size(), 0);
+            CATCH_REQUIRE(getrandom(buf.data(), buf.size(), 0) == static_cast<ssize_t>(buf.size()));
 
             // first compute the hash with the basic C function
             //
@@ -337,12 +337,12 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
         for(std::size_t count(0); count < 25; ++count)
         {
             std::size_t size(0);
-            getrandom(&size, sizeof(size), 0);
+            CATCH_REQUIRE(getrandom(&size, sizeof(size), 0) == static_cast<ssize_t>(sizeof(size)));
             size %= 256;
             size += 25; // 25 to 280
 
             std::vector<char> buf(size);
-            getrandom(buf.data(), buf.size(), 0);
+            CATCH_REQUIRE(getrandom(buf.data(), buf.size(), 0) == static_cast<ssize_t>(buf.size()));
 
             // first compute the hash with the basic C function
             //
@@ -355,7 +355,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
             while(pos < size)
             {
                 std::size_t incr(0);
-                getrandom(&incr, sizeof(incr), 0);
+                CATCH_REQUIRE(getrandom(&incr, sizeof(incr), 0) == static_cast<ssize_t>(sizeof(incr)));
                 incr %= 15;
                 ++incr; // 1 to 15
                 if(pos + incr > size)
@@ -379,7 +379,7 @@ CATCH_TEST_CASE("hash", "[hash][valid]")
     CATCH_START_SECTION("Hash validation")
     {
         murmur3::hash_t value;
-        getrandom(&value, sizeof(value), 0);
+        CATCH_REQUIRE(getrandom(&value, sizeof(value), 0) == static_cast<ssize_t>(sizeof(value)));
         murmur3::hash h;
         h.set(reinterpret_cast<std::uint8_t const *>(&value));
         CATCH_CHECK(value == h.to_uint128());
@@ -404,7 +404,7 @@ CATCH_TEST_CASE("hash", "[hash][valid]")
     CATCH_START_SECTION("Hash starts with zeroes")
     {
         murmur3::hash_t value;
-        getrandom(&value, sizeof(value), 0);
+        CATCH_REQUIRE(getrandom(&value, sizeof(value), 0) == static_cast<ssize_t>(sizeof(value)));
         value &= ~static_cast<murmur3::hash_t>(0xFFFFFFFF);
         murmur3::hash h;
         h.set(reinterpret_cast<std::uint8_t const *>(&value));
