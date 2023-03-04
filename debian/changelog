@@ -1,3 +1,9 @@
+murmur3 (1.0.6.1~bionic) bionic; urgency=high
+
+  * Removing boost as a dependency.
+
+ -- Alexis Wilke <alexis@m2osw.com>  Sat, 04 Mar 2023 09:45:08 -0800
+
 murmur3 (1.0.6.0~bionic) bionic; urgency=high
 
   * Properly renamed the packages.
