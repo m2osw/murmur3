@@ -47,6 +47,7 @@ install(
 install(
     FILES
         murmur3.h
+        stream.h
         ${CMAKE_CURRENT_BINARY_DIR}/version.h
 
     DESTINATION
