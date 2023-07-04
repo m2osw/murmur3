@@ -1,4 +1,4 @@
-murmur3 (1.0.6.1~bionic) bionic; urgency=high
+murmur3 (1.0.6.1~jammy) jammy; urgency=high
 
   * Removing boost as a dependency.
   * Fixed version date in murmur3sum command line tool.
