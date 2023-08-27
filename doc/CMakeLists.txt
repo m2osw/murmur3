@@ -16,27 +16,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 3.10.2)
 
-project(murmur3_library)
-
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
-
-find_package(LibExcept        REQUIRED)
-find_package(SnapCMakeModules REQUIRED)
-find_package(SnapDev          REQUIRED)
-
-SnapGetVersion(MURMUR3 ${CMAKE_CURRENT_SOURCE_DIR})
-
-include_directories(
-    ${PROJECT_SOURCE_DIR}
-    ${CMAKE_CURRENT_BINARY_DIR}
+##
+## Documentation
+##
+find_package(SnapDoxygen)
+AddDoxygenTarget(murmur3
+    ${MURMUR3_VERSION_MAJOR}
+    ${MURMUR3_VERSION_MINOR}
+    ${MURMUR3_VERSION_PATCH}
 )
 
-add_subdirectory(cmake  )
-add_subdirectory(murmur3)
-add_subdirectory(tools  )
-add_subdirectory(tests  )
-add_subdirectory(doc    )
+install(
+    FILES
+        murmur3sum.1
 
-# vim: ts=4 sw=4 et nocindent
+    DESTINATION
+        share/man/man1
+)
+
+# vim: ts=4 sw=4 et
