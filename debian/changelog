@@ -1,7 +1,16 @@
-murmur3 (1.0.6.1~jammy) jammy; urgency=high
+murmur3 (1.0.7.0~jammy) jammy; urgency=high
 
   * Removing boost as a dependency.
   * Fixed version date in murmur3sum command line tool.
+  * Added a missing #include <cstdint>
+  * Added missing binaries to the .install file.
+  * Install the man page.
+  * Added more documentation.
+  * Added a logo for the README.md.
+  * Updated the compat to 15.
+  * Actually install the stream.h header.
+  * Bumped copyright notice to 2023.
+  * Removed boost as a dependency.
 
  -- Alexis Wilke <alexis@m2osw.com>  Sat, 04 Mar 2023 09:45:08 -0800
 
