@@ -35,7 +35,7 @@
 
 CATCH_TEST_CASE("version", "[version][valid]")
 {
-    CATCH_START_SECTION("Verify the library version")
+    CATCH_START_SECTION("version: verify the library version")
     {
         CATCH_REQUIRE(get_murmur3_major_version() == MURMUR3_VERSION_MAJOR);
         CATCH_REQUIRE(get_murmur3_release_version() == MURMUR3_VERSION_MINOR);

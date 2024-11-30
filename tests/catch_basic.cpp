@@ -10,14 +10,6 @@
 #include    "catch_main.h"
 
 
-// C
-//
-//#include    <stdio.h>
-//#include    <stdlib.h>
-//#include    <stdint.h>
-//#include    <string.h>
-
-
 // last include
 //
 #include    <snapdev/poison.h>
@@ -27,7 +19,7 @@
 
 CATCH_TEST_CASE("basic", "[version][valid]")
 {
-    CATCH_START_SECTION("Verify C version")
+    CATCH_START_SECTION("basic: verify C version")
     {
         std::uint32_t hash[4];
 

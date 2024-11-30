@@ -30,34 +30,11 @@
 #include    <murmur3/version.h>
 
 
-// snapdev
-//
-//#include    <snapdev/not_used.h>
-
-
-// C++
-//
-//#include    <sstream>
-
-
 // last include
 //
 #include    <snapdev/poison.h>
 
 
-
-
-
-namespace SNAP_CATCH2_NAMESPACE
-{
-
-
-
-
-
-
-}
-// SNAP_CATCH2_NAMESPACE namespace
 
 
 

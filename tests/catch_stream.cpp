@@ -55,7 +55,7 @@
 
 CATCH_TEST_CASE("stream_basic", "[stream][valid]")
 {
-    CATCH_START_SECTION("Verify small stream (Hello World!)")
+    CATCH_START_SECTION("stream_basic: verify small stream (Hello World!)")
     {
         murmur3::stream sum(123, 123);
 
@@ -89,7 +89,7 @@ CATCH_TEST_CASE("stream_basic", "[stream][valid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("X28 stream")
+    CATCH_START_SECTION("stream_basic: X28 stream")
     {
         murmur3::stream sum(123, 123);
 
@@ -107,7 +107,7 @@ CATCH_TEST_CASE("stream_basic", "[stream][valid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("Empty file stream")
+    CATCH_START_SECTION("stream_basic: empty file stream")
     {
         murmur3::stream sum(123, 123);
 
@@ -129,7 +129,7 @@ CATCH_TEST_CASE("stream_basic", "[stream][valid]")
 
 CATCH_TEST_CASE("stream_file", "[stream][valid]")
 {
-    CATCH_START_SECTION("Stream files")
+    CATCH_START_SECTION("stream_file: stream files")
     {
         snapdev::glob_to_list<std::list<snapdev::file>> glob;
         CATCH_REQUIRE(glob.read_path<
@@ -186,7 +186,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("Stream with random seed")
+    CATCH_START_SECTION("stream_file: stream with random seed")
     {
         std::size_t size(0);
         CATCH_REQUIRE(getrandom(&size, sizeof(size), 0) == static_cast<ssize_t>(sizeof(size)));
@@ -211,7 +211,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("Stream 4Kb exactly (special case)")
+    CATCH_START_SECTION("stream_file: stream 4Kb exactly (special case)")
     {
         constexpr std::size_t four_kb(1024 * 4);
         char buf[four_kb];
@@ -242,7 +242,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("Stream 0Kb to 4Kb (many special cases)")
+    CATCH_START_SECTION("stream_file: stream 0Kb to 4Kb (many special cases)")
     {
         constexpr std::size_t four_kb(1024 * 4);
         for(std::size_t size(0); size < four_kb; ++size)
@@ -304,7 +304,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("1 to 15 bytes sent first")
+    CATCH_START_SECTION("stream_file: 1 to 15 bytes sent first")
     {
         // test all possibilities in the switch()
         //
@@ -330,7 +330,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("Irregular number of incoming bytes")
+    CATCH_START_SECTION("stream_file: irregular number of incoming bytes")
     {
         // test all possibilities in the switch()
         //
@@ -376,7 +376,7 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
 
 CATCH_TEST_CASE("hash", "[hash][valid]")
 {
-    CATCH_START_SECTION("Hash validation")
+    CATCH_START_SECTION("hash: validation")
     {
         murmur3::hash_t value;
         CATCH_REQUIRE(getrandom(&value, sizeof(value), 0) == static_cast<ssize_t>(sizeof(value)));
@@ -401,7 +401,7 @@ CATCH_TEST_CASE("hash", "[hash][valid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("Hash starts with zeroes")
+    CATCH_START_SECTION("hash: starts with zeroes")
     {
         murmur3::hash_t value;
         CATCH_REQUIRE(getrandom(&value, sizeof(value), 0) == static_cast<ssize_t>(sizeof(value)));
@@ -428,7 +428,7 @@ CATCH_TEST_CASE("hash", "[hash][valid]")
 
 CATCH_TEST_CASE("invalid_hash", "[hash][invalid]")
 {
-    CATCH_START_SECTION("Invalid Hash (odd size)")
+    CATCH_START_SECTION("invalid_hash: invalid hash (odd size)")
     {
         murmur3::hash h;
 
@@ -443,7 +443,7 @@ CATCH_TEST_CASE("invalid_hash", "[hash][invalid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("Invalid Hash (not hex. characters)")
+    CATCH_START_SECTION("invalid_hash: invalid hash (not hex. characters)")
     {
         murmur3::hash h;
 
@@ -458,7 +458,7 @@ CATCH_TEST_CASE("invalid_hash", "[hash][invalid]")
     }
     CATCH_END_SECTION()
 
-    CATCH_START_SECTION("Invalid Hash (too long)")
+    CATCH_START_SECTION("invalid_hash: invalid hash (too long)")
     {
         murmur3::hash h;
 
