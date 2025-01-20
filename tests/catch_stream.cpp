@@ -454,7 +454,7 @@ CATCH_TEST_CASE("invalid_hash", "[hash][invalid]")
                     , snapdev::hexadecimal_string_invalid_parameter
                     , Catch::Matchers::ExceptionMessage(
                               "hexadecimal_string_exception: input character"
-                              " 'g' is not an hexadecimal digit."));
+                              " 'g' is not a hexadecimal digit."));
     }
     CATCH_END_SECTION()
 
