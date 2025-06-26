@@ -236,8 +236,10 @@ CATCH_TEST_CASE("stream_file", "[stream][valid]")
         //
         std::string const tmp_dir(SNAP_CATCH2_NAMESPACE::g_tmp_dir());
         std::string const test_filename(tmp_dir + "/4kb.bin");
-        std::ofstream out(test_filename);
-        out.write(buf, sizeof(buf));
+        {
+            std::ofstream out(test_filename);
+            out.write(buf, sizeof(buf));
+        }
         CATCH_CHECK(murmur3::sum(test_filename).to_string() == c_hash);
     }
     CATCH_END_SECTION()
