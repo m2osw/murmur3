@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2023  Made to Order Software Corp.  All Rights Reserved
+// Copyright (c) 2012-2025  Made to Order Software Corp.  All Rights Reserved
 //
 // https://snapwebsites.org/project/murmur3
 // contact@m2osw.com
