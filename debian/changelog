@@ -1,3 +1,10 @@
+murmur3 (1.0.8.0~jammy) jammy; urgency=high
+
+  * Cleaned up & fixed tests.
+  * Removed debian/compat and use dependency in debian/control.
+
+ -- Alexis Wilke <alexis@m2osw.com>  Sun, 20 Jul 2025 15:29:38 -0700
+
 murmur3 (1.0.7.0~jammy) jammy; urgency=high
 
   * Removing boost as a dependency.
