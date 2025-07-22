@@ -1,4 +1,4 @@
-murmur3 (1.0.8.0~jammy) jammy; urgency=high
+murmur3 (1.0.8.0~noble) noble; urgency=high
 
   * Cleaned up & fixed tests.
   * Removed debian/compat and use dependency in debian/control.
