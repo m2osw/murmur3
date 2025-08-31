@@ -20,8 +20,11 @@
 ##
 ## Documentation
 ##
+project(murmur3-documentation)
+
 find_package(SnapDoxygen)
-AddDoxygenTarget(murmur3
+AddDoxygenTarget(
+    murmur3
     ${MURMUR3_VERSION_MAJOR}
     ${MURMUR3_VERSION_MINOR}
     ${MURMUR3_VERSION_PATCH}
